@@ -7,7 +7,6 @@ Official TypeScript/JavaScript SDK for the Lunaby AI API. This SDK provides a cl
 - **TypeScript-first** - Full type definitions included
 - **Streaming support** - Async iterators for streaming responses
 - **Image generation** - Generate images with Lunaby Vision
-- **OpenAI-compatible** - Familiar API structure
 - **Modern** - Uses native fetch, ESM & CommonJS support
 - **Error handling** - Comprehensive error types
 
