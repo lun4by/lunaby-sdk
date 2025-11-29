@@ -1,12 +1,5 @@
-/**
- * Lunaby SDK - Custom Error Classes
- */
-
 import type { LunabyErrorDetails, APIErrorResponse } from './types.js';
 
-/**
- * Base error class for Lunaby SDK
- */
 export class LunabyError extends Error {
   readonly status?: number;
   readonly statusText?: string;
@@ -33,9 +26,6 @@ export class LunabyError extends Error {
   }
 }
 
-/**
- * Error thrown when API returns an error response
- */
 export class APIError extends LunabyError {
   constructor(
     message: string,
@@ -80,9 +70,6 @@ export class APIError extends LunabyError {
   }
 }
 
-/**
- * Error thrown when authentication fails
- */
 export class AuthenticationError extends LunabyError {
   constructor(message: string = 'Authentication failed. Please check your API key.') {
     super(message, { status: 401, type: 'authentication_error' });
@@ -90,9 +77,6 @@ export class AuthenticationError extends LunabyError {
   }
 }
 
-/**
- * Error thrown when rate limit is exceeded
- */
 export class RateLimitError extends LunabyError {
   readonly retryAfter?: number;
 
@@ -103,9 +87,6 @@ export class RateLimitError extends LunabyError {
   }
 }
 
-/**
- * Error thrown when request times out
- */
 export class TimeoutError extends LunabyError {
   constructor(message: string = 'Request timed out') {
     super(message, { code: 'ETIMEDOUT', type: 'timeout_error' });
@@ -113,9 +94,6 @@ export class TimeoutError extends LunabyError {
   }
 }
 
-/**
- * Error thrown when connection fails
- */
 export class ConnectionError extends LunabyError {
   constructor(message: string = 'Failed to connect to the server', code?: string) {
     super(message, { code, type: 'connection_error' });
@@ -123,9 +101,6 @@ export class ConnectionError extends LunabyError {
   }
 }
 
-/**
- * Error thrown when content violates safety policies
- */
 export class ContentFilterError extends LunabyError {
   readonly categories?: Record<string, boolean>;
 
@@ -136,9 +111,6 @@ export class ContentFilterError extends LunabyError {
   }
 }
 
-/**
- * Error thrown during streaming
- */
 export class StreamError extends LunabyError {
   constructor(message: string = 'Error occurred during streaming', cause?: Error) {
     super(message, { type: 'stream_error' }, cause);
@@ -146,9 +118,6 @@ export class StreamError extends LunabyError {
   }
 }
 
-/**
- * Error thrown when request is aborted
- */
 export class AbortError extends LunabyError {
   constructor(message: string = 'Request was aborted') {
     super(message, { code: 'ABORT_ERR', type: 'abort_error' });
@@ -156,9 +125,6 @@ export class AbortError extends LunabyError {
   }
 }
 
-/**
- * Error thrown for invalid parameters
- */
 export class ValidationError extends LunabyError {
   constructor(message: string, field?: string) {
     super(message, { type: 'validation_error', details: { field } });

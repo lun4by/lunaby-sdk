@@ -1,13 +1,6 @@
-/**
- * Lunaby SDK - Streaming Utilities
- */
-
 import type { ChatCompletionChunk, StreamEvent } from './types.js';
 import { StreamError } from './errors.js';
 
-/**
- * Parse Server-Sent Events (SSE) from a stream
- */
 export async function* parseSSEStream(
   stream: ReadableStream<Uint8Array>
 ): AsyncGenerator<StreamEvent, void, unknown> {
@@ -47,9 +40,6 @@ export async function* parseSSEStream(
   }
 }
 
-/**
- * Parse a single SSE line
- */
 function parseLine(line: string): StreamEvent | null {
   const trimmed = line.trim();
   
@@ -68,9 +58,6 @@ function parseLine(line: string): StreamEvent | null {
   return null;
 }
 
-/**
- * Stream wrapper that provides async iteration over chat completion chunks
- */
 export class ChatStream implements AsyncIterable<ChatCompletionChunk> {
   private _stream: ReadableStream<Uint8Array>;
   private _abortController?: AbortController;
@@ -82,30 +69,18 @@ export class ChatStream implements AsyncIterable<ChatCompletionChunk> {
     this._abortController = abortController;
   }
 
-  /**
-   * Abort the stream
-   */
   abort(): void {
     this._abortController?.abort();
   }
 
-  /**
-   * Get the full content accumulated from the stream
-   */
   get fullContent(): string {
     return this._fullContent;
   }
 
-  /**
-   * Get token usage (if available at end of stream)
-   */
   get usage(): ChatCompletionChunk['usage'] | undefined {
     return this._usage;
   }
 
-  /**
-   * Async iterator implementation
-   */
   async *[Symbol.asyncIterator](): AsyncGenerator<ChatCompletionChunk, void, unknown> {
     try {
       for await (const event of parseSSEStream(this._stream)) {
@@ -142,9 +117,6 @@ export class ChatStream implements AsyncIterable<ChatCompletionChunk> {
     }
   }
 
-  /**
-   * Collect all chunks and return the final content
-   */
   async toContent(): Promise<string> {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     for await (const _ of this) {
@@ -153,9 +125,6 @@ export class ChatStream implements AsyncIterable<ChatCompletionChunk> {
     return this._fullContent;
   }
 
-  /**
-   * Collect all chunks into an array
-   */
   async toArray(): Promise<ChatCompletionChunk[]> {
     const chunks: ChatCompletionChunk[] = [];
     for await (const chunk of this) {
@@ -164,9 +133,6 @@ export class ChatStream implements AsyncIterable<ChatCompletionChunk> {
     return chunks;
   }
 
-  /**
-   * Process stream with callbacks
-   */
   async process(callbacks: {
     onChunk?: (chunk: ChatCompletionChunk) => void;
     onContent?: (content: string, accumulated: string) => void;
@@ -192,9 +158,6 @@ export class ChatStream implements AsyncIterable<ChatCompletionChunk> {
   }
 }
 
-/**
- * Response wrapper for non-streaming responses
- */
 export class ChatResponse<T> {
   constructor(
     public readonly data: T,
@@ -202,16 +165,10 @@ export class ChatResponse<T> {
     public readonly status: number
   ) {}
 
-  /**
-   * Get a header value
-   */
   getHeader(name: string): string | null {
     return this.headers.get(name);
   }
 
-  /**
-   * Get rate limit information from headers
-   */
   getRateLimitInfo(): {
     limit?: number;
     remaining?: number;

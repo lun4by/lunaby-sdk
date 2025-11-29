@@ -1,7 +1,3 @@
-/**
- * Lunaby SDK - Images Resource
- */
-
 import { Buffer } from 'node:buffer';
 
 import type {
@@ -16,9 +12,6 @@ import { ChatResponse } from '../streaming.js';
 import { ValidationError } from '../errors.js';
 import type { LunabyClient } from '../client.js';
 
-/**
- * Options for generating images
- */
 export interface GenerateImageOptions extends RequestOptions {
   model?: Model;
   n?: number;
@@ -29,15 +22,9 @@ export interface GenerateImageOptions extends RequestOptions {
   user?: string;
 }
 
-/**
- * Images API resource
- */
 export class Images {
   constructor(private readonly client: LunabyClient) {}
 
-  /**
-   * Generate images from a text prompt
-   */
   async generate(
     prompt: string,
     options: GenerateImageOptions = {}
@@ -89,9 +76,6 @@ export class Images {
     return new ChatResponse(transformedResponse, response.headers, response.status);
   }
 
-  /**
-   * Generate a single image and return it as a Buffer
-   */
   async generateBuffer(
     prompt: string,
     options: GenerateImageOptions = {}
@@ -116,9 +100,6 @@ export class Images {
     };
   }
 
-  /**
-   * Validate the prompt
-   */
   private validatePrompt(prompt: string): void {
     if (!prompt || typeof prompt !== 'string') {
       throw new ValidationError('prompt must be a non-empty string', 'prompt');

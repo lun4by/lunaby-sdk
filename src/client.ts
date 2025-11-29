@@ -1,7 +1,3 @@
-/**
- * Lunaby SDK - Main Client
- */
-
 import type {
   LunabyClientOptions,
   Model,
@@ -25,41 +21,11 @@ const DEFAULT_TIMEOUT = 120000; // 2 minutes
 const DEFAULT_MAX_RETRIES = 2;
 const DEFAULT_MODEL: Model = 'lunaby-pro';
 
-/**
- * Request configuration for internal use
- */
 interface InternalRequestConfig extends RequestOptions {
   method?: string;
   body?: string;
 }
 
-/**
- * Lunaby API Client
- * 
- * @example
- * ```typescript
- * import Lunaby from 'lunaby-sdk';
- * 
- * const lunaby = new Lunaby({
- *   apiKey: process.env.LUNABY_API_KEY,
- * });
- * 
- * // Non-streaming
- * const response = await lunaby.chat.create([
- *   { role: 'user', content: 'Hello!' }
- * ]);
- * console.log(response.data.choices[0].message.content);
- * 
- * // Streaming
- * const stream = await lunaby.chat.createStream([
- *   { role: 'user', content: 'Tell me a story' }
- * ]);
- * 
- * for await (const chunk of stream) {
- *   process.stdout.write(chunk.choices[0].delta.content || '');
- * }
- * ```
- */
 export class LunabyClient {
   readonly apiKey: string;
   readonly baseURL: string;
@@ -70,14 +36,7 @@ export class LunabyClient {
 
   private readonly _fetch: FetchFunction;
 
-  /**
-   * Chat Completions API
-   */
   readonly chat: ChatCompletions;
-
-  /**
-   * Images API
-   */
   readonly images: Images;
 
   constructor(options: LunabyClientOptions = {}) {
@@ -98,9 +57,6 @@ export class LunabyClient {
     this.images = new Images(this);
   }
 
-  /**
-   * Make a request to the API
-   */
   async request<T>(
     path: string,
     config: InternalRequestConfig = {}
@@ -164,9 +120,6 @@ export class LunabyClient {
     }
   }
 
-  /**
-   * Make a streaming request to the API
-   */
   async requestStream(
     path: string,
     config: InternalRequestConfig = {}
@@ -233,9 +186,6 @@ export class LunabyClient {
     }
   }
 
-  /**
-   * Handle error responses from the API
-   */
   private async handleErrorResponse(response: Response): Promise<never> {
     let body: unknown;
     
@@ -266,15 +216,9 @@ export class LunabyClient {
     );
   }
 
-  /**
-   * Check if the client is properly configured
-   */
   isConfigured(): boolean {
     return !!this.apiKey;
   }
 }
 
-/**
- * Default export - create a new Lunaby client
- */
 export default LunabyClient;

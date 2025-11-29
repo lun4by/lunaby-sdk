@@ -1,7 +1,3 @@
-/**
- * Lunaby SDK - Chat Completions Resource
- */
-
 import type {
   ChatCompletionRequest,
   ChatCompletionResponse,
@@ -14,9 +10,6 @@ import { ChatStream, ChatResponse } from '../streaming.js';
 import { ValidationError } from '../errors.js';
 import type { LunabyClient } from '../client.js';
 
-/**
- * Options for creating chat completions
- */
 export interface CreateChatCompletionOptions extends RequestOptions {
   model?: Model;
   max_tokens?: number;
@@ -28,15 +21,9 @@ export interface CreateChatCompletionOptions extends RequestOptions {
   user?: string;
 }
 
-/**
- * Chat Completions API resource
- */
 export class ChatCompletions {
   constructor(private readonly client: LunabyClient) {}
 
-  /**
-   * Create a chat completion (non-streaming)
-   */
   async create(
     messages: ChatMessage[],
     options: CreateChatCompletionOptions = {}
@@ -66,9 +53,6 @@ export class ChatCompletions {
     return response;
   }
 
-  /**
-   * Create a streaming chat completion
-   */
   async createStream(
     messages: ChatMessage[],
     options: CreateChatCompletionOptions = {}
@@ -98,9 +82,6 @@ export class ChatCompletions {
     return new ChatStream(stream, abortController);
   }
 
-  /**
-   * Create a chat completion and iterate over chunks (convenience method)
-   */
   async *stream(
     messages: ChatMessage[],
     options: CreateChatCompletionOptions = {}
@@ -114,9 +95,6 @@ export class ChatCompletions {
     return chatStream.fullContent;
   }
 
-  /**
-   * Validate messages array
-   */
   private validateMessages(messages: ChatMessage[]): void {
     if (!Array.isArray(messages)) {
       throw new ValidationError('messages must be an array', 'messages');

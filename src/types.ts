@@ -1,13 +1,4 @@
-/**
- * Lunaby SDK - Types and Interfaces
- * OpenAI-compatible API types for Lunaby AI services
- */
-
 /// <reference lib="dom" />
-
-// ============================================
-// Core Types
-// ============================================
 
 export type Model = 
   | 'lunaby-pro' 
@@ -20,10 +11,6 @@ export type MessageRole = 'system' | 'user' | 'assistant';
 export type AspectRatio = '1:1' | '16:9' | '9:16' | '4:3' | '3:4' | '21:9';
 
 export type OutputFormat = 'png' | 'jpeg' | 'webp';
-
-// ============================================
-// Chat Completion Types
-// ============================================
 
 export interface ChatMessage {
   role: MessageRole;
@@ -80,10 +67,6 @@ export interface ChatCompletionChunk {
   usage?: TokenUsage;
 }
 
-// ============================================
-// Image Generation Types
-// ============================================
-
 export interface ImageGenerationRequest {
   model?: Model;
   prompt: string;
@@ -107,10 +90,6 @@ export interface ImageGenerationResponse {
   usage?: TokenUsage;
 }
 
-// ============================================
-// Client Configuration Types
-// ============================================
-
 export type FetchFunction = (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>;
 
 export interface LunabyClientOptions {
@@ -128,10 +107,6 @@ export interface RequestOptions {
   timeout?: number;
   headers?: Record<string, string>;
 }
-
-// ============================================
-// Error Types
-// ============================================
 
 export interface LunabyErrorDetails {
   status?: number;
@@ -151,10 +126,6 @@ export interface APIErrorResponse {
   };
 }
 
-// ============================================
-// Stream Types
-// ============================================
-
 export interface StreamEvent {
   event?: string;
   data: string;
@@ -166,10 +137,6 @@ export interface StreamOptions extends RequestOptions {
   onDone?: () => void;
   onError?: (error: Error) => void;
 }
-
-// ============================================
-// Utility Types
-// ============================================
 
 export type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 

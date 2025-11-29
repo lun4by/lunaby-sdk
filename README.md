@@ -1,36 +1,35 @@
-# Lunie SDK
+# Lunaby SDK
 
-Official TypeScript/JavaScript SDK for the Lunie AI API. This SDK provides a clean, type-safe interface for interacting with Lunie AI services including chat completions and image generation.
+Official TypeScript/JavaScript SDK for the Lunaby AI API. This SDK provides a clean, type-safe interface for interacting with Lunaby AI services including chat completions and image generation.
 
 ## Features
 
-- ✨ **TypeScript-first** - Full type definitions included
-- 🌊 **Streaming support** - Async iterators for streaming responses
-- 🖼️ **Image generation** - Generate images with Lunaby Vision
-- 🔄 **OpenAI-compatible** - Familiar API structure
-- ⚡ **Modern** - Uses native fetch, ESM & CommonJS support
-- 🛡️ **Error handling** - Comprehensive error types
+- **TypeScript-first** - Full type definitions included
+- **Streaming support** - Async iterators for streaming responses
+- **Image generation** - Generate images with Lunaby Vision
+- **OpenAI-compatible** - Familiar API structure
+- **Modern** - Uses native fetch, ESM & CommonJS support
+- **Error handling** - Comprehensive error types
 
 ## Installation
 
 ```bash
-npm install lunie-sdk
+npm install lunaby-sdk
 # or
-yarn add lunie-sdk
+yarn add lunaby-sdk
 # or
-pnpm add lunie-sdk
+pnpm add lunaby-sdk
 ```
 
 ## Quick Start
 
 ```typescript
-import Lunie from 'lunie-sdk';
+import Lunaby from 'lunaby-sdk';
 
-const client = new Lunie({
-  apiKey: process.env.LUNIE_API_KEY, // or set LUNIE_API_KEY env variable
+const client = new Lunaby({
+  apiKey: process.env.LUNABY_API_KEY,
 });
 
-// Simple chat completion
 const response = await client.chat.create([
   { role: 'user', content: 'Hello, Lunaby!' }
 ]);
@@ -45,9 +44,9 @@ console.log(response.data.choices[0].message.content);
 #### Non-streaming
 
 ```typescript
-import Lunie from 'lunie-sdk';
+import Lunaby from 'lunaby-sdk';
 
-const client = new Lunie({ apiKey: 'your-api-key' });
+const client = new Lunaby({ apiKey: 'your-api-key' });
 
 const response = await client.chat.create([
   { role: 'system', content: 'You are a helpful assistant.' },
@@ -141,14 +140,14 @@ const reasoning = await client.chat.create([
 ### Error Handling
 
 ```typescript
-import Lunie, {
+import Lunaby, {
   APIError,
   AuthenticationError,
   RateLimitError,
   TimeoutError,
   ValidationError,
   ContentFilterError,
-} from 'lunie-sdk';
+} from 'lunaby-sdk';
 
 try {
   const response = await client.chat.create([
@@ -174,13 +173,13 @@ try {
 ### Configuration
 
 ```typescript
-const client = new Lunie({
-  apiKey: 'your-api-key',           // Required (or set LUNIE_API_KEY env var)
-  baseURL: 'https://api.lunie.dev/v1', // Optional, custom API endpoint
-  timeout: 120000,                   // Optional, request timeout in ms (default: 120000)
-  maxRetries: 2,                     // Optional, max retry attempts (default: 2)
-  defaultModel: 'lunaby-pro',        // Optional, default model
-  defaultHeaders: {                  // Optional, custom headers
+const client = new Lunaby({
+  apiKey: 'your-api-key',
+  baseURL: 'https://api.lunie.dev/v1',
+  timeout: 120000,
+  maxRetries: 2,
+  defaultModel: 'lunaby-pro',
+  defaultHeaders: {
     'X-Custom-Header': 'value'
   },
 });
@@ -217,8 +216,8 @@ import type {
   ImageGenerationResponse,
   TokenUsage,
   Model,
-  LunieClientOptions,
-} from 'lunie-sdk';
+  LunabyClientOptions,
+} from 'lunaby-sdk';
 
 const messages: ChatMessage[] = [
   { role: 'system', content: 'You are helpful.' },
@@ -230,8 +229,8 @@ const messages: ChatMessage[] = [
 
 The SDK automatically reads these environment variables:
 
-- `LUNIE_API_KEY` - Your API key
-- `LUNIE_BASE_URL` - Custom API base URL (optional)
+- `LUNABY_API_KEY` - Your API key
+- `LUNABY_BASE_URL` - Custom API base URL (optional)
 
 ## Browser Support
 
@@ -247,6 +246,6 @@ Contributions are welcome! Please open an issue or pull request on GitHub.
 
 ## Links
 
-- [GitHub Repository](https://github.com/Lun4by/lunie-sdk)
-- [Documentation](https://docs.lunie.dev)
+- [GitHub Repository](https://github.com/Lun4by/lunaby-sdk)
+- [Documentation](https://docs.lunaby.dev)
 - [API Reference](https://api.lunie.dev/docs)
