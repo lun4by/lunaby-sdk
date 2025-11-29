@@ -1,0 +1,69 @@
+{
+  "name": "lunaby-sdk",
+  "version": "1.0.0",
+  "description": "Official SDK for Lunaby AI API - Chat completions, image generation, and more",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+    "test": "vitest",
+    "lint": "eslint src --ext .ts",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "lunaby",
+    "lunie",
+    "ai",
+    "sdk",
+    "chat",
+    "completions",
+    "image-generation",
+    "streaming",
+    "openai-compatible"
+  ],
+  "author": {
+    "name": "s4ory"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Lun4by/lunaby-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Lun4by/lunaby-sdk/issues"
+  },
+  "homepage": "https://github.com/Lun4by/lunaby-sdk#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "vitest": "^1.0.0",
+    "eslint": "^8.55.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0"
+  },
+  "peerDependencies": {
+    "node-fetch": ">=3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "node-fetch": {
+      "optional": true
+    }
+  }
+}

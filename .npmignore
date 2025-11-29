@@ -1,0 +1,25 @@
+# Source files (types are in dist)
+src/
+
+# Examples
+examples/
+
+# Config files
+tsconfig.json
+.eslintrc*
+.prettierrc*
+vitest.config.*
+
+# Test files
+*.test.ts
+*.spec.ts
+__tests__/
+coverage/
+
+# Development files
+.gitignore
+.github/
+.vscode/
+
+# Build artifacts not needed in package
+*.tsbuildinfo
