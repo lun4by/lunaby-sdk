@@ -10,8 +10,6 @@ const client = new Lunaby({
 });
 
 async function simpleChatExample() {
-  console.log('\n=== Simple Chat Example ===\n');
-  
   const response = await client.chat.create([
     { role: 'system', content: 'You are a helpful assistant named Lunaby.' },
     { role: 'user', content: 'Hello! What is your name?' }
@@ -22,10 +20,6 @@ async function simpleChatExample() {
 }
 
 async function streamingChatExample() {
-  console.log('\n=== Streaming Chat Example ===\n');
-  
-  console.log('Response: ');
-  
   const stream = await client.chat.createStream([
     { role: 'user', content: 'Tell me a short joke about programming.' }
   ]);
@@ -41,8 +35,6 @@ async function streamingChatExample() {
 }
 
 async function streamingWithCallbacks() {
-  console.log('\n=== Streaming with Callbacks ===\n');
-  
   const stream = await client.chat.createStream([
     { role: 'user', content: 'Count from 1 to 5 slowly.' }
   ]);
@@ -65,8 +57,6 @@ async function streamingWithCallbacks() {
 }
 
 async function conversationExample() {
-  console.log('\n=== Multi-turn Conversation ===\n');
-  
   const messages: ChatMessage[] = [
     { role: 'system', content: 'You are a helpful math tutor.' }
   ];
@@ -88,8 +78,6 @@ async function conversationExample() {
 }
 
 async function imageGenerationExample() {
-  console.log('\n=== Image Generation Example ===\n');
-  
   const result = await client.images.generateBuffer(
     'A cute robot cat with glowing blue eyes, digital art style',
     {
@@ -106,8 +94,6 @@ async function imageGenerationExample() {
 }
 
 async function errorHandlingExample() {
-  console.log('\n=== Error Handling Example ===\n');
-  
   const badClient = new Lunaby({ apiKey: 'invalid-key' });
   
   try {
@@ -129,8 +115,6 @@ async function errorHandlingExample() {
 }
 
 async function modelSelectionExample() {
-  console.log('\n=== Model Selection Example ===\n');
-  
   const reasoningResponse = await client.chat.create([
     { role: 'user', content: 'Solve step by step: If a train travels 120km in 2 hours, what is its average speed?' }
   ], {

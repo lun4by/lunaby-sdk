@@ -48,10 +48,6 @@ export class LunabyClient {
     this.defaultHeaders = options.defaultHeaders || {};
     this._fetch = options.fetch || globalThis.fetch;
 
-    if (!this.apiKey) {
-      console.warn('[Lunaby SDK] Warning: No API key provided. Set LUNABY_API_KEY environment variable or pass apiKey option.');
-    }
-
     // Initialize resources
     this.chat = new ChatCompletions(this);
     this.images = new Images(this);

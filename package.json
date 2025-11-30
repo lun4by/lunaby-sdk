@@ -43,7 +43,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Lun4by/lunaby-sdk.git"
+    "url": "git+https://github.com/Lun4by/lunaby-sdk.git"
   },
   "bugs": {
     "url": "https://github.com/Lun4by/lunaby-sdk/issues"
