@@ -10,9 +10,9 @@
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.js"
     }
   },
   "files": [
@@ -43,12 +43,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Lun4by/lunaby-sdk.git"
+    "url": "git+https://github.com/lun4by/lunaby-sdk.git"
   },
   "bugs": {
-    "url": "https://github.com/Lun4by/lunaby-sdk/issues"
+    "url": "https://github.com/lun4by/lunaby-sdk/issues"
   },
-  "homepage": "https://github.com/Lun4by/lunaby-sdk#readme",
+  "homepage": "https://github.com/lun4by/lunaby-sdk#readme",
   "engines": {
     "node": ">=18.0.0"
   },
