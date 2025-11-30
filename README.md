@@ -231,10 +231,6 @@ The SDK automatically reads these environment variables:
 - `LUNABY_API_KEY` - Your API key
 - `LUNABY_BASE_URL` - Custom API base URL (optional)
 
-## Browser Support
-
-This SDK works in browsers that support the Fetch API and ReadableStream. For older browsers, you may need polyfills.
-
 ## License
 
 MIT
@@ -245,6 +241,6 @@ Contributions are welcome! Please open an issue or pull request on GitHub.
 
 ## Links
 
-- [GitHub Repository](https://github.com/Lun4by/lunaby-sdk)
-- [Documentation](https://docs.lunaby.dev)
-- [API Reference](https://api.lunie.dev/docs)
+- [GitHub Repository](https://github.com/lun4by/lunaby-sdk)
+- [Documentation](https://docs.lunaby.tech)
+- [API Reference](https://api.lunie.dev)
