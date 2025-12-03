@@ -1,10 +1,10 @@
 {
-  "name": "@lun4by/lunaby-sdk",
-  "version": "1.0.1",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
+  "name": "lunaby-sdk",
+  "version": "1.0.0",
   "description": "Official SDK for Lunaby AI API - Chat completions, image generation, and more",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+},
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
