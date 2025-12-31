@@ -1,6 +1,6 @@
 {
   "name": "lunaby-sdk",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Official SDK for Lunaby AI API - Chat completions, image generation, and more",
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
@@ -20,8 +20,8 @@
     "src"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
-    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+    "build": "tsup",
+    "dev": "tsup --watch",
     "test": "vitest",
     "lint": "eslint src --ext .ts",
     "prepublishOnly": "npm run build"
