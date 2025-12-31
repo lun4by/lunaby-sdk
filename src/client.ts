@@ -40,7 +40,7 @@ interface RequestContext {
   timeoutId?: ReturnType<typeof setTimeout>;
 }
 
-export class LunabyClient {
+export class Lunaby {
   readonly apiKey: string;
   readonly baseURL: string;
   readonly timeout: number;
@@ -340,4 +340,4 @@ export class LunabyClient {
   }
 }
 
-export default LunabyClient;
+export default Lunaby;

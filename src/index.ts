@@ -1,5 +1,5 @@
 
-export { LunabyClient, LunabyClient as default } from './client.js';
+export { Lunaby, Lunaby as default } from './client.js';
 
 export { ChatCompletions, type CreateChatCompletionOptions } from './resources/chat.js';
 export { Images, type GenerateImageOptions } from './resources/images.js';
@@ -25,7 +25,7 @@ export type {
   MessageRole,
   AspectRatio,
   OutputFormat,
-  
+
   // Chat types
   ChatMessage,
   ChatCompletionRequest,
@@ -34,21 +34,21 @@ export type {
   ChatCompletionChunk,
   ChatCompletionStreamChoice,
   TokenUsage,
-  
+
   // Image types
   ImageGenerationRequest,
   ImageGenerationResponse,
   ImageData,
-  
+
   // Client types
   LunabyClientOptions,
   RequestOptions,
   FetchFunction,
-  
+
   // Error types
   LunabyErrorDetails,
   APIErrorResponse,
-  
+
   // Stream types
   StreamEvent,
   StreamOptions,

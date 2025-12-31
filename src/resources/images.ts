@@ -10,7 +10,7 @@ import type {
 } from '../types.js';
 import { ChatResponse } from '../streaming.js';
 import { ValidationError } from '../errors.js';
-import type { LunabyClient } from '../client.js';
+import type { Lunaby } from '../client.js';
 
 export interface GenerateImageOptions extends RequestOptions {
   model?: Model;
@@ -23,7 +23,7 @@ export interface GenerateImageOptions extends RequestOptions {
 }
 
 export class Images {
-  constructor(private readonly client: LunabyClient) {}
+  constructor(private readonly client: Lunaby) { }
 
   async generate(
     prompt: string,

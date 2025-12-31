@@ -1,6 +1,6 @@
 {
   "name": "lunaby-sdk",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Official SDK for Lunaby AI API - Chat completions, image generation, and more",
   "publishConfig": {
     "registry": "https://registry.npmjs.org"

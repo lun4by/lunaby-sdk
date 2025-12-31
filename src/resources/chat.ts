@@ -8,7 +8,7 @@ import type {
 } from '../types.js';
 import { ChatStream, ChatResponse } from '../streaming.js';
 import { ValidationError } from '../errors.js';
-import type { LunabyClient } from '../client.js';
+import type { Lunaby } from '../client.js';
 
 export interface CreateChatCompletionOptions extends RequestOptions {
   model?: Model;
@@ -22,7 +22,7 @@ export interface CreateChatCompletionOptions extends RequestOptions {
 }
 
 export class ChatCompletions {
-  constructor(private readonly client: LunabyClient) {}
+  constructor(private readonly client: Lunaby) { }
 
   async create(
     messages: ChatMessage[],
@@ -31,7 +31,7 @@ export class ChatCompletions {
     this.validateMessages(messages);
 
     const { signal, timeout, headers, ...params } = options;
-    
+
     const body: ChatCompletionRequest = {
       model: params.model || this.client.defaultModel,
       messages,
@@ -87,7 +87,7 @@ export class ChatCompletions {
     options: CreateChatCompletionOptions = {}
   ): AsyncGenerator<ChatCompletionChunk, string, unknown> {
     const chatStream = await this.createStream(messages, options);
-    
+
     for await (const chunk of chatStream) {
       yield chunk;
     }
@@ -106,7 +106,7 @@ export class ChatCompletions {
 
     for (let i = 0; i < messages.length; i++) {
       const msg = messages[i];
-      
+
       if (!msg || typeof msg !== 'object') {
         throw new ValidationError(`messages[${i}] must be an object`, 'messages');
       }
