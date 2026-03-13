@@ -75,6 +75,8 @@ export interface ImageGenerationRequest {
   aspect_ratio?: AspectRatio;
   output_format?: OutputFormat;
   response_format?: 'url' | 'b64_json';
+  seed?: number;
+  negative_prompt?: string;
   user?: string;
 }
 

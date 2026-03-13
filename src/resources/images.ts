@@ -19,6 +19,8 @@ export interface GenerateImageOptions extends RequestOptions {
   aspect_ratio?: AspectRatio;
   output_format?: OutputFormat;
   response_format?: 'url' | 'b64_json';
+  seed?: number;
+  negative_prompt?: string;
   user?: string;
 }
 
@@ -41,39 +43,17 @@ export class Images {
     };
 
     const response = await this.client.request<ImageGenerationResponse>(
-      '/chat/completions',
+      '/images/generations',
       {
         method: 'POST',
-        body: JSON.stringify({
-          model: body.model,
-          messages: [{ role: 'user', content: prompt }],
-          max_tokens: 4096,
-          stream: false,
-          aspect_ratio: body.aspect_ratio || '1:1',
-          output_format: body.output_format || 'png',
-        }),
+        body: JSON.stringify(body),
         signal,
         timeout,
         headers,
       }
     );
 
-    // Transform the response to match ImageGenerationResponse format
-    const rawData = response.data as unknown as {
-      data?: Array<{ b64_json?: string; revised_prompt?: string }>;
-      usage?: ImageGenerationResponse['usage'];
-    };
-
-    const transformedResponse: ImageGenerationResponse = {
-      created: Date.now(),
-      data: rawData.data?.map((item) => ({
-        b64_json: item.b64_json,
-        revised_prompt: item.revised_prompt,
-      })) || [],
-      usage: rawData.usage,
-    };
-
-    return new ChatResponse(transformedResponse, response.headers, response.status);
+    return response;
   }
 
   async generateBuffer(
