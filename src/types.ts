@@ -2,8 +2,7 @@
 
 export type Model = 
   | 'lunaby'
-  | 'lunaby-pro' 
-  | 'lunaby-reasoning' 
+  | 'lunaby-pro'
   | 'lunaby-vision'
   | (string & {});
 
