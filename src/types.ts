@@ -1,21 +1,42 @@
 /// <reference lib="dom" />
 
 export type Model = 
+  | 'lunaby'
   | 'lunaby-pro' 
   | 'lunaby-reasoning' 
   | 'lunaby-vision'
   | (string & {});
 
-export type MessageRole = 'system' | 'user' | 'assistant';
+export type MessageRole = 'system' | 'user' | 'assistant' | 'tool';
 
 export type AspectRatio = '1:1' | '16:9' | '9:16' | '4:3' | '3:4' | '21:9';
 
 export type OutputFormat = 'png' | 'jpeg' | 'webp';
 
+export interface ToolCall {
+  id: string;
+  type: 'function';
+  function: {
+    name: string;
+    arguments: string;
+  };
+}
+
+export interface ToolDefinition {
+  type: 'function';
+  function: {
+    name: string;
+    description?: string;
+    parameters?: Record<string, unknown>;
+  };
+}
+
 export interface ChatMessage {
   role: MessageRole;
   content: string;
   name?: string;
+  tool_calls?: ToolCall[];
+  tool_call_id?: string;
 }
 
 export interface ChatCompletionRequest {
@@ -29,6 +50,8 @@ export interface ChatCompletionRequest {
   presence_penalty?: number;
   frequency_penalty?: number;
   user?: string;
+  tools?: ToolDefinition[];
+  tool_choice?: 'auto' | 'none';
 }
 
 export interface ChatCompletionChoice {

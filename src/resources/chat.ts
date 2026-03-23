@@ -5,6 +5,7 @@ import type {
   ChatMessage,
   Model,
   RequestOptions,
+  ToolDefinition,
 } from '../types.js';
 import { ChatStream, ChatResponse } from '../streaming.js';
 import { ValidationError } from '../errors.js';
@@ -19,6 +20,8 @@ export interface CreateChatCompletionOptions extends RequestOptions {
   presence_penalty?: number;
   frequency_penalty?: number;
   user?: string;
+  tools?: ToolDefinition[];
+  tool_choice?: 'auto' | 'none';
 }
 
 export class ChatCompletions {
@@ -111,9 +114,16 @@ export class ChatCompletions {
         throw new ValidationError(`messages[${i}] must be an object`, 'messages');
       }
 
-      if (!msg.role || !['system', 'user', 'assistant'].includes(msg.role)) {
+      if (!msg.role || !['system', 'user', 'assistant', 'tool'].includes(msg.role)) {
         throw new ValidationError(
-          `messages[${i}].role must be 'system', 'user', or 'assistant'`,
+          `messages[${i}].role must be 'system', 'user', 'assistant', or 'tool'`,
+          'messages'
+        );
+      }
+
+      if (msg.role === 'tool' && !msg.tool_call_id) {
+        throw new ValidationError(
+          `messages[${i}] with role 'tool' must have tool_call_id`,
           'messages'
         );
       }

@@ -95,8 +95,10 @@ export class ChatStream implements AsyncIterable<ChatCompletionChunk> {
         try {
           const chunk: ChatCompletionChunk = JSON.parse(event.data);
           
-          // Accumulate content
-          const content = chunk.choices?.[0]?.delta?.content;
+          // Accumulate content (fallback to message.content for agent endpoints)
+          const delta = chunk.choices?.[0]?.delta;
+          const message = (chunk.choices?.[0] as any)?.message;
+          const content = delta?.content || message?.content;
           if (content) {
             this._fullContent += content;
           }
@@ -143,7 +145,9 @@ export class ChatStream implements AsyncIterable<ChatCompletionChunk> {
       for await (const chunk of this) {
         callbacks.onChunk?.(chunk);
 
-        const content = chunk.choices?.[0]?.delta?.content;
+        const delta = chunk.choices?.[0]?.delta;
+        const message = (chunk.choices?.[0] as any)?.message;
+        const content = delta?.content || message?.content;
         if (content) {
           callbacks.onContent?.(content, this._fullContent);
         }

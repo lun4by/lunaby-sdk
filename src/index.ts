@@ -34,6 +34,8 @@ export type {
   ChatCompletionChunk,
   ChatCompletionStreamChoice,
   TokenUsage,
+  ToolCall,
+  ToolDefinition,
 
   // Image types
   ImageGenerationRequest,
